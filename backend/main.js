@@ -4,6 +4,8 @@ const parse = require('csv-parse');
 
 const PORT = 3000;
 
+const FRONTEND_FILES_PATH = "../frontend";
+
 const createDBFromCSVFile = function(filename) {
     let db = new Map();
     fs.createReadStream(filename)
@@ -45,7 +47,7 @@ const db = createDBFromCSVFile(csvFilename);
 // create webserver
 const app = express();
 
-app.use(express.static('../frontend'));
+app.use(express.static(FRONTEND_FILES_PATH));
 
 app.get('/betriebsstelle/:abbreviation', async (req, res) => {
     let abbr = req.params.abbreviation.toLowerCase();

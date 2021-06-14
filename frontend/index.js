@@ -1,28 +1,38 @@
 
-// returns the information about the operation station
-// as a json object
-function getOperatingStationInformation(abbreviation) {
-    let endpoint = `/betriebsstelle/${abbreviation}`;
+function displayOperatingStationInformation(name, shortName, type) {
+    document.getElementById("name").innerText = "Name: " + name;
+    document.getElementById("kurzname").innerText = "Kurzname: " + shortName;
+    document.getElementById("typ").innerText = "Typ: " + type;
+}
 
-    let xhttp = new XMLHttpRequest();
-    /*xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Typical action to be performed when the document is ready:
-            document.getElementById("demo").innerHTML = xhttp.responseText;
-        }
-    };*/
-    xhttp.open("GET", endpoint, false);
-    xhttp.send();
-    return JSON.parse(xhttp.responseText);
+function displayError(message) {
+    document.getElementById("error").innerText = message;
+}
+
+function resetUI() {
+    displayError("");
+    displayOperatingStationInformation("", "", "");
 }
 
 function onSendClicked() {
-    let abbrev = document.getElementById("stationAbbrev").value;
-    console.log("operating station abbreviation = " + abbrev);
+    let abbreviation = document.getElementById("stationAbbrev").value;
+    console.log("operating station abbreviation = " + abbreviation);
 
-    let response = getOperatingStationInformation(abbrev);
+    let endpoint = `/betriebsstelle/${abbreviation}`;
 
-    document.getElementById("name").innerText = "Name: " + response["Name"];
-    document.getElementById("kurzname").innerText = "Kurzname: " + response["Kurzname"];
-    document.getElementById("typ").innerText = "Typ: " + response["Typ"];
+    resetUI();
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(xhttp.responseText);
+            let name = response["Name"];
+            let shortName = response["Kurzname"];
+            let type = response["Typ"];
+            displayOperatingStationInformation(name, shortName, type);
+        } else if (this.status == 404) {
+            displayError("Keine Daten zur Abkürzung gefunden");
+        }
+    };
+    xhttp.open("GET", endpoint, true);
+    xhttp.send();
 }

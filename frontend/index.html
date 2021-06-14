@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>DB Betriebsstellen Wiki</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
         <script src="index.js"></script>
     </head>
@@ -12,10 +13,11 @@
             </h2>
             <div>
                 <label for="abbrev">Abkürzung:</label>
-                <input type="text" id="stationAbbrev" name="abbrev">
+                <input type="text" id="stationAbbrev" name="abbrev" onKeyDown="if (event.keyCode == 13) onSendClicked();"/>
                 <button onclick="onSendClicked()">Senden</button>
             </div>
             <br/>
+            <div id="error" class="property" style="color: red;"></div>
             <div id="name" class="property">Name:</div>
             <div id="kurzname" class="property">Kurzname:</div>
             <div id="typ" class="property">Typ:</div>
