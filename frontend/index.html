@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DB Betriebsstellen Wiki</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="index.js"></script>
+    </head>
+    <body style="background-color: #e0e0e0; width: 100%;">
+        <div id="main">
+            <h2 id="title">
+                DB Betriebsstellen Wiki
+            </h2>
+            <div>
+                <label for="abbrev">Abkürzung:</label>
+                <input type="text" id="stationAbbrev" name="abbrev">
+                <button onclick="onSendClicked()">Senden</button>
+            </div>
+            <br/>
+            <div id="name" class="property">Name:</div>
+            <div id="kurzname" class="property">Kurzname:</div>
+            <div id="typ" class="property">Typ:</div>
+        </div>
+    </body>
+</html>
