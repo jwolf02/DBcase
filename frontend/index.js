@@ -16,6 +16,10 @@ function resetUI() {
 
 function onSendClicked() {
     let abbreviation = document.getElementById("stationAbbrev").value;
+    if (abbreviation == "") {
+        return;
+    }
+
     console.log("operating station abbreviation = " + abbreviation);
 
     let endpoint = `/betriebsstelle/${abbreviation}`;
