@@ -5,7 +5,7 @@ DB case study
 docker-compose up
 
 ## Show Frontend
-got to 127.0.0.1/index.html
+go to http://127.0.0.1/index.html
 
 ## Backend API
 /betriebsstelle/${ABBREVIATION}
